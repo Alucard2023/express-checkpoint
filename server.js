@@ -1,45 +1,35 @@
-const http = require('http');
+const express=require('express');
+const app = express();
+const PORT=6300;
 const fs = require('fs');
-const path = require('path');
+const v =require('./verif')
 
-const server = http.createServer((req, res) => {
-  let filePath = '.' + req.url;
+app.get('/',v,(req,res)=>{
+    fs.readFile('./Home.html','utf8',(err,data)=>{
+        err ? res.send('file not found') && console.error(err) : res.send(data)
+    })
+})
 
-  if (filePath === './') {
-    filePath = './index.html';
-  }
+app.get('/Home.html',v,(req,res)=>{
+    fs.readFile('./Home.html','utf8',(err,data)=>{
+        err ? res.send('file not found') && console.error(err) : res.send(data)
+    })
+})
 
-  const extname = path.extname(filePath);
-  let contentType = 'text/html';
 
-  switch (extname) {
-    case '.css':
-      contentType = 'text/css';
-      break;
-    case '.js':
-      contentType = 'text/javascript';
-      break;
-  }
+app.get('/Contact.html',v,(req,res)=>{
+    fs.readFile('./Contact.html','utf8',(err,data)=>{
+        err ? res.send('file not found') && console.error(err) : res.send(data)
+    })
+})
 
-  fs.readFile(filePath, (error, content) => {
-    if (error) {
-      if (error.code === 'ENOENT') {
-        res.writeHead(404);
-        res.end('404 Not Found');
-      } else {
-        res.writeHead(500);
-        res.end('500 Internal Server Error');
-      }
-    } else {
-      res.writeHead(200, { 'Content-Type': contentType });
-      res.end(content, 'utf-8');
-    }
-  });
-});
+app.get('/Services.html',v,(req,res)=>{
+    fs.readFile('./Services.html','utf8',(err,data)=>{
+        err ? res.send('file not found') && console.error(err) : res.send(data)
+    })
+})
 
-const port = 5200;
-const hostname = 'localhost';
-
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+app.listen(PORT,(req,res)=>{
+    console.log(`Server is running on port ${PORT}`);
+}
+)

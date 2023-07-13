@@ -1,13 +1,16 @@
-function isWorkingHours() {
-    const now = new Date();
-    const dayOfWeek = now.getDay();
-    const hours = now.getHours();
+let day=new Date().getDay()
+let hours=new Date().getHours()
+const fs = require('fs');
+
+function verif1(req,res,next){
+  if(day>0 && day<6 && hours>8 && hours<17)
+  next()
+    else 
+
+      fs.readFile('./text.html','utf8',(err,data)=>{
+          err ? res.send('file not found') && console.error(err) : res.send(data)
+      })
   
-    // Check if it's Monday to Friday (dayOfWeek from 1 to 5) and between 9 and 17 (9 AM to 5 PM)
-    return dayOfWeek >= 1 && dayOfWeek <= 5 && hours >= 9 && hours < 17;
-  }
-  
-  // Redirect to a "closed" page if it's outside working hours
-  if (!isWorkingHours()) {
-    window.location.href = "Closed.html";
-  }
+}
+
+module.exports=verif1 ;

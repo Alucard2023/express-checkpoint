@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="text.css">
+    <title>Document</title>
+    <style>
+    *{
+  background-color: rgb(175, 192, 192);
+  
+}
+#blink {
+  animation-duration: .8s;
+  animation-name: clignoter;
+  animation-iteration-count: infinite;
+  transition: none;
+}
+
+@keyframes clignoter {
+ 0%   { opacity:1; }
+ 40%   {opacity:0; }
+ 100% { opacity:1; }
+}
+</style>
+</head>
+
+<body>
+    <h1 id="blink">Welcome service closed now..., service open 8h--17h / Monday to Friday</h1>
+
+    
+</body>
+</html>
